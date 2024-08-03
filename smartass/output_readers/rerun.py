@@ -59,7 +59,6 @@ def get_output(script, expanded):
 
     
     split_expand = shlex.split(expanded)
-    print(expanded)
     is_slow = split_expand[0] in settings.slow_commands if split_expand else False
     with logs.debug_time(u'Call: {}; with env: {}; is slow: {}'.format(
             script, env, is_slow)):
@@ -68,7 +67,6 @@ def get_output(script, expanded):
         if _wait_output(result, is_slow):
             output = result.stdout.read().decode('utf-8', errors='replace')
             logs.debug(u'Received output: {}'.format(output))
-            print('output')
             return output
         else:
             logs.debug(u'Execution timed out!')
