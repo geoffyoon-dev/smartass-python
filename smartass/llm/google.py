@@ -86,7 +86,6 @@ Return a `List[CommandCandidate]`
 def get_new_commands(client, command):
     prompt = _build_prompt(command)
     response = client.generate_content(prompt)
-    
     json_response = _parse_raw_json_response(response.text)
     return json_response
 

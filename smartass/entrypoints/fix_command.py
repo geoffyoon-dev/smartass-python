@@ -41,7 +41,6 @@ def fix_command(known_args):
         
         corrected_commands = get_corrected_commands(command)
         selected_command = select_command(corrected_commands)
-        print(type(selected_command))
         if selected_command:
             selected_command.run(command)
         else:

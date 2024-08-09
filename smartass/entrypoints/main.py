@@ -33,8 +33,6 @@ def main():
         print_alias(known_args)
         return
     
-    
-    
     if known_args.command or 'TF_HISTORY' in os.environ:
         fix_command(known_args)
         return

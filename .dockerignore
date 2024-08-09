@@ -1,0 +1,6 @@
+.venv
+scripts
+*.egg-info
+.dockerignore
+Dockerfile
+

@@ -94,7 +94,7 @@ class Settings(dict):
         elif attr in ('slow_commands', 'excluded_search_path_prefixes'):
             return val.split(':')
         else:
-            return valS
+            return val
         
     def _settings_from_env(self):
         """Loads settings from env."""

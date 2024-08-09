@@ -3,7 +3,7 @@ import sys
 from . import logs
 from .shells import shell
 from .conf import settings, load_source
-from .exceptions import EmptyCommand
+from .exceptions import EmptyCommand, NoLlmProviderAPIKey
 from .utils import format_raw_script
 from .output_readers import get_output
 
@@ -111,7 +111,20 @@ class LLM(object):
         :rtype: Iterable[CorrectedCommand]
 
         """
-        new_commands = self.get_new_commands(self.client, command)
+        if self.provider == 'google':
+            from google.auth.exceptions import DefaultCredentialsError
+            
+        try:
+            new_commands = self.get_new_commands(self.client, command)
+        except DefaultCredentialsError as e:
+            raise NoLlmProviderAPIKey("  No API_KEY or ADC found. Please either:\n" +
+                "    - Set the 'SMARTASS_API_KEY' environment variable.\n" +
+                "    - Write your API Key to the 'settings.py' file in the '~/.config/smartass/' directory.\n" +
+                "    - Run 'smartass configure' to set your API Key.\n" + 
+                "    - Set the `GOOGLE_API_KEY` environment variable.\n" +
+                "    - Or set up Application Default Credentials, see https://ai.google.dev/gemini-api/docs/oauth for more information.\n"
+            )
+            
         if not isinstance(new_commands, list):
             new_commands = (new_commands,)
         for new_command in new_commands:

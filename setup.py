@@ -36,7 +36,7 @@ if (3, 0) < version < (3, 5):
 
 VERSION = '0.02'
 
-install_requires = ['psutil', 'colorama', 'six', 'google-generativeai', 'google-ai-generativelanguage']
+install_requires = ['psutil', 'colorama', 'six']
 extras_require = {':python_version<"3.4"': ['pathlib2'],
                   ':python_version<"3.3"': ['backports.shutil_get_terminal_size'],
                   ':python_version<="2.7"': ['decorator<5', 'pyte<0.8.1'],
